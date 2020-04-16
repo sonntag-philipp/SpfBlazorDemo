@@ -1,0 +1,39 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.SignalR
+@using SpfBlazorDemo.Hubs
+@using SpfBlazorDemo.Services
+@inject IHubContext<SpfHub> spfHub
+@inject MessageService messageService
+
+<h1>Blazor App</h1>
+
+@code
+{
+    public List<string> Messages { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Messages = new List<string>();
+        messageService.MessageAdd += HandleMessage;
+    }
+
+    private void HandleMessage(object sender, string message)
+    {
+        Messages.Add(message);
+        InvokeAsync(StateHasChanged);
+    }
+
+    public async Task SendMessage()
+    {
+        await spfHub.Clients.All.SendCoreAsync("BroadcastAsync", new object[] {"Hallo von Blazor :D"}).ConfigureAwait(false);
+    }
+
+}
+
+<button @onclick="SendMessage">Greetings @@Angular</button>
+
+<h3>Messages:</h3>
+@foreach (var item in Messages)
+{
+    <p>@item</p>
+}
