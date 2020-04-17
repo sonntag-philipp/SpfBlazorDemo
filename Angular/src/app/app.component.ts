@@ -9,7 +9,7 @@ import * as signalR from '@aspnet/signalr';
 export class AppComponent implements OnInit {
 
   private hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl('https://localhost:5001/spfHub')
+    .withUrl('../spfHub')
     .build();
 
   public messages: string[] = [];

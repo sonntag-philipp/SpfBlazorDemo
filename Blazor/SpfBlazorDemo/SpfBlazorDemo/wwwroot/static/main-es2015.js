@@ -60,7 +60,7 @@ function AppComponent_mat_list_item_10_Template(rf, ctx) { if (rf & 1) {
 class AppComponent {
     constructor() {
         this.hubConnection = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["HubConnectionBuilder"]()
-            .withUrl('https://localhost:5001/spfHub')
+            .withUrl('../spfHub')
             .build();
         this.messages = [];
     }
